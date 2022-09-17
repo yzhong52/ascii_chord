@@ -23,7 +23,7 @@ fn main() {
     let args = Args::parse();
 
     let chords: HashMap<&str, &str> =
-        HashMap::from([("C", "x32010"), ("G", "230003"), ("D", "xx0232")]);
+        HashMap::from([("C", "x32010"), ("G", "320003"), ("D", "xx0232")]);
 
     match chords.get(&args.name[..]) {
         None => println!("Unknown chord '{}'", args.name),
