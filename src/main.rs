@@ -1,3 +1,12 @@
+const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯ 
+┌─┬─┬─┬─┬─┐
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+└─┴─┴─┴─┴─┘";
+
 fn main() {
-    println!("Hello, world!");
+    println!("{}", FRETBOARD);
 }
