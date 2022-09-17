@@ -1,6 +1,6 @@
 # Ascii Chord
 
-A command line tool for showing how to play a guitar chord. 
+A command line tool for showing how to play guitar chords
 
 ## Usage
 
