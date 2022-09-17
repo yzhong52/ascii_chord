@@ -4,7 +4,9 @@ use clap::Parser;
 mod chords;
 
 const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
-┌─┬─┬─┬─┬─┐
+╒═╤═╤═╤═╤═╕
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
 │ │ │ │ │ │
 ├─┼─┼─┼─┼─┤
 │ │ │ │ │ │
@@ -31,6 +33,13 @@ fn main() {
         None => println!("Unknown chord '{}'", args.name),
         Some(chord) => {
             let mut board: Vec<char> = FRETBOARD.chars().collect();
+
+            if let Some(barre) = &chord.barre {
+                for i in barre.from_string..barre.to_string * 2 + 1 {
+                    board[i as usize + 24 * barre.fret as usize] = '-'
+                }
+            }
+
             for (i, ch) in chord.pattern.chars().enumerate() {
                 let idx: usize = i * 2;
                 if ch == 'x' {
@@ -43,7 +52,7 @@ fn main() {
             }
             println!(
                 "This is how you play '{}' chord: \n{}",
-                args.name,
+                chord.name,
                 board.iter().collect::<String>()
             )
         }
