@@ -5,7 +5,7 @@ A command line tool for showing how to play guitar chords
 ## Usage
 
 ```
-$ chord G               
+$ aschord G               
 This is how you play 'G' chord: 
     ◯ ◯ ◯  
 ┌─┬─┬─┬─┬─┐
