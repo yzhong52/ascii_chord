@@ -1,7 +1,7 @@
 extern crate clap;
 
 use clap::Parser;
-use std::collections::HashMap;
+mod chords;
 
 const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 ┌─┬─┬─┬─┬─┐
@@ -24,14 +24,14 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let chords: HashMap<&str, &str> =
-        HashMap::from([("C", "x32010"), ("G", "320003"), ("D", "xx0232")]);
-
-    match chords.get(&args.name[..]) {
+    match chords::CHORDS
+        .iter()
+        .find(|&chord| chord.short_name.to_ascii_uppercase() == args.name.to_ascii_uppercase())
+    {
         None => println!("Unknown chord '{}'", args.name),
-        Some(pattern) => {
+        Some(chord) => {
             let mut board: Vec<char> = FRETBOARD.chars().collect();
-            for (i, ch) in pattern.chars().enumerate() {
+            for (i, ch) in chord.pattern.chars().enumerate() {
                 let idx: usize = i * 2;
                 if ch == 'x' {
                     board[idx] = ch
