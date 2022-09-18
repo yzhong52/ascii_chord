@@ -21,7 +21,43 @@ pub struct Chord<'a> {
     pub barre: Option<Barre>,
 }
 
-pub static CHORDS: &'static [&'static Chord] = &[
+const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
+╒═╤═╤═╤═╤═╕
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+└─┴─┴─┴─┴─┘";
+
+impl Chord<'_> {
+    pub fn fretboard(&self) -> String {
+        let mut board: Vec<char> = FRETBOARD.chars().collect();
+
+        if let Some(barre) = &self.barre {
+            for i in barre.from_string..barre.to_string * 2 + 1 {
+                board[i as usize + 24 * barre.fret as usize] = '-'
+            }
+        }
+
+        for (i, ch) in self.pattern.chars().enumerate() {
+            let idx: usize = i * 2;
+            if ch == 'x' {
+                board[idx] = ch
+            } else {
+                let value: usize = ch.to_digit(10).unwrap() as usize;
+                board[idx] = ' ';
+                board[idx + 24 * value] = '◯'
+            }
+        }
+
+        board.iter().collect()
+    }
+}
+
+pub static ALL_CHORDS: &'static [&'static Chord] = &[
     &Chord {
         short_name: "A",
         pattern: "x02220",
