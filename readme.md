@@ -38,11 +38,19 @@ See [all supported chords](all_supported_chords.md).
 
 ## Development
 
+### Build & Run
+
 ```
 cargo run -- G
 ```
 
-## Release
+### Unit Tests
+
+```
+cargo test
+```
+
+### Release
 
 ```
 cargo publish

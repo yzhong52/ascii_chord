@@ -1,6 +1,8 @@
 use clap::{Parser, Subcommand};
 
 use crate::chords;
+use crate::stitcher;
+use chords::Chord;
 use std::fs;
 
 /// A CLI to show you how to play a guitar chord
@@ -15,16 +17,20 @@ pub struct Args {
 impl Args {
     pub fn run(self) {
         match self.command {
-            Command::All(all_args) => all_args.run(),
-
             Command::Get(get_args) => get_args.run(),
+            Command::List(list_args) => list_args.run(),
+            Command::All(all_args) => all_args.run(),
         }
     }
 }
 
 #[derive(Subcommand, Debug)]
 pub enum Command {
+    /// Get a single chord
     Get(GetArgs),
+    /// List multiple chords
+    List(ListArgs),
+    /// Print all the supported chords
     All(AllArgs),
 }
 
@@ -65,10 +71,40 @@ impl AllArgs {
             buffer += &format!("\n## {}\n", chord.name).to_string();
             buffer += &format!("```\n{}\n```", chord.fretboard()).to_string();
         }
-        
+
         if self.save {
             fs::write("./all_supported_chords.md", &buffer).expect("Unable to write file");
         }
         println!("{}\n", buffer);
+    }
+}
+
+#[derive(Parser, Debug)]
+pub struct ListArgs {
+    /// Names of the chords
+    #[clap()]
+    names: Vec<String>,
+}
+
+impl ListArgs {
+    fn run(self) {
+        // We would like to keep the order that 'names' are passed in
+        let chords: Vec<Chord<'static>> = self
+            .names
+            .iter()
+            .map(|name| -> Vec<Chord<'static>> {
+                // Find the ones that matches the chord name
+                match chords::ALL_CHORDS_BY_SHORT_NAME.get(&name.to_ascii_lowercase()) {
+                    Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
+                        .iter()
+                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { *chord.clone() })
+                        .collect(),
+                    None => vec![],
+                }
+            })
+            .flatten()
+            .collect();
+        let row = stitcher::row(chords);
+        println!("{}", row);
     }
 }
