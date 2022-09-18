@@ -30,11 +30,11 @@ cargo install --path .
 Install from <https://crates.io/crates/aschord>:
 
 ```
-cargo install chord
+cargo install aschord
 ```
 ## All Support Chords
 
-[`all_supported_chords.md`](all_supported_chords.md)
+See [all supported chords](all_supported_chords.md).
 
 ## Development
 
