@@ -61,6 +61,8 @@ For all support chords:
 $ aschord all
 ```
 
+Also see all supported chords [here](all_supported_chords.md) (auto-generated, do not edit).
+
 ## Installation
 
 Install local version:
@@ -76,9 +78,6 @@ Install from <https://crates.io/crates/aschord>:
 ```
 cargo install aschord
 ```
-## All Support Chords
-
-See [all supported chords](all_supported_chords.md).
 
 ## Development
 

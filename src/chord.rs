@@ -9,6 +9,12 @@ pub struct Barre {
     pub fret: u16,
 }
 
+pub const BARRE_FRET1: Barre = Barre {
+    from_string: 0,
+    to_string: 5,
+    fret: 1,
+};
+
 #[derive(Debug, Clone, Copy)]
 pub struct Chord<'a> {
     pub short_name: &'a str,
