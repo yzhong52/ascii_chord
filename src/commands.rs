@@ -1,8 +1,9 @@
 use clap::{Parser, Subcommand};
+use stitcher::NameStyle;
 
 use crate::chords;
 use crate::stitcher;
-use chords::Chord;
+use chord::Chord;
 use std::fs;
 
 /// A CLI to show you how to play a guitar chord
@@ -68,7 +69,7 @@ impl AllArgs {
         buffer += "# All Supported Chords";
 
         for chord in chords::ALL_CHORDS {
-            buffer += &format!("\n## {}\n", chord.name).to_string();
+            buffer += &format!("\n## {}\n", chord.both_names()).to_string();
             buffer += &format!("```\n{}\n```", chord.fretboard()).to_string();
         }
 
@@ -84,6 +85,10 @@ pub struct ListArgs {
     /// Names of the chords
     #[clap()]
     names: Vec<String>,
+
+    /// In the output, which name to include
+    #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortName)]
+    name_style: NameStyle,
 }
 
 impl ListArgs {
@@ -99,12 +104,15 @@ impl ListArgs {
                         .iter()
                         .map(|chord: &&'static Chord<'static>| -> Chord<'static> { *chord.clone() })
                         .collect(),
-                    None => vec![],
+                    None => {
+                        println!("Unknown chord '{}'", name);
+                        vec![]
+                    }
                 }
             })
             .flatten()
             .collect();
-        let row = stitcher::row(chords);
+        let row = stitcher::row(chords, self.name_style);
         println!("{}", row);
     }
 }

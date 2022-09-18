@@ -4,8 +4,11 @@ A command line tool for showing how to play guitar chords
 
 ## Usage
 
+For a single chord:
+
 ```
-$ aschord G               
+$ aschord get G
+
 This is how you play 'G' chord: 
     ◯ ◯ ◯  
 ┌─┬─┬─┬─┬─┐
@@ -15,6 +18,47 @@ This is how you play 'G' chord:
 ├─┼─┼─┼─┼─┤
 ◯ │ │ │ │ ◯
 └─┴─┴─┴─┴─┘
+```
+
+For multiple chords:
+```
+$ aschord list Em Esus4 Asus2 F
+
+Em             Esus4          Asus2          F              
+◯     ◯ ◯ ◯    ◯       ◯ ◯    x ◯     ◯ ◯                   
+╒═╤═╤═╤═╤═╕    ╒═╤═╤═╤═╤═╕    ╒═╤═╤═╤═╤═╕    ╒═╤═╤═╤═╤═╕    
+│ │ │ │ │ │    │ │ │ │ │ │    │ │ │ │ │ │    ◯-------◯-◯    
+├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    
+│ ◯ ◯ │ │ │    │ ◯ ◯ ◯ │ │    │ │ ◯ ◯ │ │    │ │ │ ◯ │ │    
+├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    
+│ │ │ │ │ │    │ │ │ │ │ │    │ │ │ │ │ │    │ ◯ ◯ │ │ │    
+├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    ├─┼─┼─┼─┼─┤    
+│ │ │ │ │ │    │ │ │ │ │ │    │ │ │ │ │ │    │ │ │ │ │ │    
+└─┴─┴─┴─┴─┘    └─┴─┴─┴─┴─┘    └─┴─┴─┴─┴─┘    └─┴─┴─┴─┴─┘   
+```
+
+For multiple chords with full names:
+
+```
+$ aschord list Em Esus4 Asus2 F --style full-name
+
+E minor             E suspended fourth  A suspended 2nd     F major             
+◯     ◯ ◯ ◯         ◯       ◯ ◯         x ◯     ◯ ◯                             
+╒═╤═╤═╤═╤═╕         ╒═╤═╤═╤═╤═╕         ╒═╤═╤═╤═╤═╕         ╒═╤═╤═╤═╤═╕         
+│ │ │ │ │ │         │ │ │ │ │ │         │ │ │ │ │ │         ◯-------◯-◯         
+├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         
+│ ◯ ◯ │ │ │         │ ◯ ◯ ◯ │ │         │ │ ◯ ◯ │ │         │ │ │ ◯ │ │         
+├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         
+│ │ │ │ │ │         │ │ │ │ │ │         │ │ │ │ │ │         │ ◯ ◯ │ │ │         
+├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         ├─┼─┼─┼─┼─┤         
+│ │ │ │ │ │         │ │ │ │ │ │         │ │ │ │ │ │         │ │ │ │ │ │         
+└─┴─┴─┴─┴─┘         └─┴─┴─┴─┴─┘         └─┴─┴─┴─┴─┘         └─┴─┴─┴─┴─┘   
+```
+
+For all support chords:
+
+```
+$ aschord all
 ```
 
 ## Installation
@@ -40,8 +84,22 @@ See [all supported chords](all_supported_chords.md).
 
 ### Build & Run
 
+Show a single chord:
+
 ```
 cargo run -- G
+```
+
+Show multiple chords:
+
+```
+cargo run -- list Em Esus4 Asus2 Fm D Am
+```
+
+Show all chords:
+
+```
+cargo run -- all
 ```
 
 ### Unit Tests

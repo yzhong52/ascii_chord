@@ -1,14 +1,35 @@
-use chords::Chord;
-use chords::FRETBOARD;
+use chord::Chord;
+use chord::FRETBOARD;
+use clap::ArgEnum;
+use std::cmp::max;
 
-pub fn row<'a>(chords: Vec<Chord<'a>>) -> String {
-    // The 'PADDING' between chords horizontally
-    const PADDING: usize = 4;
+#[derive(Debug, ArgEnum, Clone)]
+pub enum NameStyle {
+    ShortName,
+    FullName,
+    BothNames,
+}
+
+pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
+    let display_names: Vec<String> = chords
+        .iter()
+        .map(|chord| match name_style {
+            NameStyle::ShortName => chord.short_name.to_owned(),
+            NameStyle::FullName => chord.name.to_owned(),
+            NameStyle::BothNames => chord.both_names(),
+        })
+        .collect();
+
+    let max_display_name_width = display_names.iter().map(|name| name.len()).max().unwrap();
 
     let num_chords = chords.len();
     let board: Vec<&str> = FRETBOARD.split('\n').collect();
     let board_width = board[0].chars().count();
-    let width = (board_width + PADDING) * num_chords;
+
+    // The 'padding' between chords horizontally
+    let padding: usize = max(4, max_display_name_width as i32 - board_width as i32 + 2) as usize;
+
+    let width = (board_width + padding) * num_chords;
 
     // +1 for the label - name of chord
     let height = board.len() + 1;
@@ -16,10 +37,9 @@ pub fn row<'a>(chords: Vec<Chord<'a>>) -> String {
     let mut buffer = vec![vec![' '; width]; height];
 
     // Print the names of the chords
-    for (i, chord) in chords.iter().enumerate() {
-        let full_name = format!("{} ({})", chord.name, chord.short_name);
-        for (char_id, char) in full_name.chars().enumerate() {
-            buffer[0][char_id + i * (board_width + PADDING)] = char;
+    for (i, display_name) in display_names.iter().enumerate() {
+        for (char_id, char) in display_name.chars().enumerate() {
+            buffer[0][char_id + i * (board_width + padding)] = char;
         }
     }
 
@@ -33,7 +53,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>) -> String {
 
         for (line_id, line) in diagram.iter().enumerate() {
             for (char_id, char) in line.chars().enumerate() {
-                buffer[line_id + 1][char_id + i * (board_width + PADDING)] = char;
+                buffer[line_id + 1][char_id + i * (board_width + padding)] = char;
             }
         }
     }
