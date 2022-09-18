@@ -1,5 +1,5 @@
-use chord::BARRE_FRET1;
 use chord::Chord;
+use chord::{BARRE_FRET1, BARRE_FRET2};
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
 
@@ -60,8 +60,14 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     },
     Chord {
         short_name: "Bm",
-        pattern: "xx4432",
+        pattern: "224432",
         name: "B minor",
+        barre: Some(BARRE_FRET2),
+    },
+    Chord {
+        short_name: "Bm",
+        pattern: "xx4432",
+        name: "B minor (no bar)",
         barre: None,
     },
     Chord {
