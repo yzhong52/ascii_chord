@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 
 use crate::chords;
+use std::fs;
 
 /// A CLI to show you how to play a guitar chord
 #[derive(Parser)]
@@ -14,12 +15,8 @@ pub struct Args {
 impl Args {
     pub fn run(self) {
         match self.command {
-            Command::All => {
-                for chord in chords::ALL_CHORDS {
-                    println!("{}:\n{}", chord.name, chord.fretboard())
-                }
-                
-            },
+            Command::All(all_args) => all_args.run(),
+
             Command::Get(get_args) => get_args.run(),
         }
     }
@@ -28,11 +25,10 @@ impl Args {
 #[derive(Subcommand, Debug)]
 pub enum Command {
     Get(GetArgs),
-    All,
+    All(AllArgs),
 }
 
 #[derive(Parser, Debug)]
-#[clap(version, about)]
 pub struct GetArgs {
     /// Name of the chord
     #[clap()]
@@ -52,5 +48,27 @@ impl GetArgs {
                 chord.fretboard()
             ),
         }
+    }
+}
+
+#[derive(Parser, Debug)]
+pub struct AllArgs {
+    #[clap(default_value_t = false)]
+    save: bool,
+}
+impl AllArgs {
+    fn run(self) {
+        let mut buffer: String = String::default();
+        buffer += "# All Supported Chords";
+
+        for chord in chords::ALL_CHORDS {
+            buffer += &format!("\n## {}\n", chord.name).to_string();
+            buffer += &format!("```\n{}\n```", chord.fretboard()).to_string();
+        }
+        
+        if self.save {
+            fs::write("./all_supported_chords.md", &buffer).expect("Unable to write file");
+        }
+        println!("{}\n", buffer);
     }
 }

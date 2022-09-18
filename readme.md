@@ -27,11 +27,14 @@ cd ascii_chord
 cargo install --path .
 ```
 
-Install from <https://crates.io/crates/chord>:
+Install from <https://crates.io/crates/aschord>:
 
 ```
 cargo install chord
 ```
+## All Support Chords
+
+[`all_supported_chords.md`](all_supported_chords.md)
 
 ## Development
 
@@ -44,3 +47,4 @@ cargo run -- G
 ```
 cargo publish
 ```
+
