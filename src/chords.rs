@@ -49,7 +49,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Bmaj7",
         pattern: "22130x",
-        name: "B Major 7th",
+        name: "B major 7th",
         barre: None,
     },
     Chord {
@@ -85,7 +85,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Cmaj7",
         pattern: "x32000",
-        name: "C Major 7th",
+        name: "C major 7th",
         barre: None,
     },
     Chord {
@@ -115,7 +115,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Dmaj7",
         pattern: "xx0222",
-        name: "D Major 7th",
+        name: "D major 7th",
         barre: None,
     },
     Chord {
@@ -145,7 +145,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Emaj7",
         pattern: "021100",
-        name: "E Major 7th",
+        name: "E major 7th",
         barre: None,
     },
     Chord {
@@ -181,7 +181,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Fmaj7",
         pattern: "xx3210",
-        name: "F Major 7th",
+        name: "F major 7th",
         barre: None,
     },
     Chord {
@@ -217,7 +217,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Gmaj7",
         pattern: "3x0002",
-        name: "G Major 7th",
+        name: "G major 7th",
         barre: None,
     },
     Chord {
