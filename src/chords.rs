@@ -169,7 +169,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_name: "Esus4",
         pattern: "022200",
-        name: "E suspended fourth",
+        name: "E suspended 4th",
         barre: None,
     },
     Chord {
@@ -195,6 +195,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         pattern: "133111",
         name: "F minor",
         barre: Some(BARRE_FRET1),
+    },
+    Chord {
+        short_name: "Fm",
+        pattern: "xx3111",
+        name: "F minor (no bar)",
+        barre: None,
     },
     Chord {
         short_name: "Fm7",
