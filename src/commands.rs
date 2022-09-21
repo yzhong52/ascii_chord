@@ -69,8 +69,8 @@ impl AllArgs {
         buffer += "# All Supported Chords";
 
         for chord in chords::ALL_CHORDS {
-            buffer += &format!("\n## {}\n", chord.both_names()).to_string();
-            buffer += &format!("```\n{}\n```", chord.fretboard()).to_string();
+            buffer += &format!("\n\n## {}\n\n", chord.both_names()).to_string();
+            buffer += &format!("{{% include chord-begin %}}\n{}\n{{% include chord-end %}}", chord.fretboard()).to_string();
         }
 
         if self.save {
