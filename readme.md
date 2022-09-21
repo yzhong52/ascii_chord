@@ -19,28 +19,25 @@ This is how you play 'G' chord:
 
 ## Installation
 
-Install local version:
-
 ```
 git clone git@github.com:yzhong52/ascii_chord.git
 cd ascii_chord
 cargo install --path .
 ```
 
-Install from <https://crates.io/crates/chord>:
-
-```
-cargo install chord
-```
-
 ## Development
 
 ```
-cargo run -- G
-```
-
-## Release
-
-```
-cargo publish
+$ cargo run -- G
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/chord G`
+This is how you play 'G' chord: 
+    ◯ ◯ ◯  
+┌─┬─┬─┬─┬─┐
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ ◯ │ │ │ │
+├─┼─┼─┼─┼─┤
+◯ │ │ │ │ ◯
+└─┴─┴─┴─┴─┘
 ```
