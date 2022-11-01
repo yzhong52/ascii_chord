@@ -32,10 +32,12 @@ pub struct Args {
     /// The symbol used annotate the finger placement
     /// 
     /// For example, 
-    /// aschord -f ♥ get G
+    /// ```
+    /// $ aschord -f ♥ get G
+    /// ```
     /// 
     /// Other recommended symbols: ◉, ◯, ⦿, ♥, ❥ 
-    #[clap(short, long, default_value_t = '◯')]
+    #[clap(short, long, default_value_t = '◯', verbatim_doc_comment)]
     finger_notation: char,
     
     #[clap(subcommand)]
