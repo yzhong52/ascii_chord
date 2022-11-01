@@ -74,6 +74,23 @@ E minor          E suspended 4th  A suspended 2nd  F major
 └─┴─┴─┴─┴─┘      └─┴─┴─┴─┴─┘      └─┴─┴─┴─┴─┘      └─┴─┴─┴─┴─┘
 ```
 
+Changing the style of the output:
+
+```
+$ aschord -f ♥ get G    
+This is how you play 'G major' chord: 
+    ◯ ◯ ◯  
+╒═╤═╤═╤═╤═╕
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ ♥ │ │ │ │
+├─┼─┼─┼─┼─┤
+♥ │ │ │ │ ♥
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+└─┴─┴─┴─┴─┘
+```
+
 For all support chords:
 
 ```

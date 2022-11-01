@@ -1,16 +1,15 @@
 use chord::Chord;
 use chord::FRETBOARD;
-use clap::ArgEnum;
 use std::cmp::max;
 
-#[derive(Debug, ArgEnum, Clone)]
+#[derive(clap::ValueEnum, Debug, Clone, Copy)]
 pub enum NameStyle {
     ShortName,
     FullName,
     BothNames,
 }
 
-pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
+pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, finger_notation: char) -> String {
     let display_names: Vec<String> = chords
         .iter()
         .map(|chord| match name_style {
@@ -27,13 +26,16 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
     let board_width = board[0].chars().count();
 
     // The 'padding' between chords horizontally
-    // Minimum 4 spaces between chords; 
+    // Minimum 4 spaces between chords;
     // Minimum 2 spaces between titles;
     let padding: usize = max(4, max_display_name_width as i32 - board_width as i32 + 2) as usize;
 
     // We need to make sure the last one has enough additional padding for the title
-    let last_padding = max(0, display_names.last().unwrap().len() as i32 - board_width as i32) as usize;
-    
+    let last_padding = max(
+        0,
+        display_names.last().unwrap().len() as i32 - board_width as i32,
+    ) as usize;
+
     let width = (board_width + padding) * num_chords - padding + last_padding;
 
     // +1 for the label - name of chord
@@ -51,7 +53,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
     // Print the chord diagram
     for (i, chord) in chords.iter().enumerate() {
         let diagram: Vec<String> = chord
-            .fretboard()
+            .fretboard(finger_notation)
             .split('\n')
             .map(|line| line.to_owned())
             .collect();

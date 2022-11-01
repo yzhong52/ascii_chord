@@ -49,7 +49,7 @@ impl Chord<'_> {
         format!("{} ({})", self.name, self.short_name)
     }
 
-    pub fn fretboard(&self) -> String {
+    pub fn fretboard(&self, finger_notation: char) -> String {
         let mut board: Vec<char> = FRETBOARD.chars().collect();
 
         if let Some(barre) = &self.barre {
@@ -64,8 +64,10 @@ impl Chord<'_> {
                 board[idx] = ch
             } else {
                 let value: usize = ch.to_digit(10).unwrap() as usize;
-                board[idx] = ' ';
-                board[idx + 24 * value] = '◯'
+                if value > 0 {
+                    board[idx] = ' ';
+                    board[idx + 24 * value] = finger_notation
+                }
             }
         }
 

@@ -6,11 +6,38 @@ use crate::stitcher;
 use chord::Chord;
 use std::fs;
 
+const ABOUT: &str = "A CLI to show you how to play a guitar chord";
+const LONG_ABOUT: &str = r#"A CLI to show you how to play a guitar chord
+
+Example:
+
+$ aschord get G
+
+This is how you play 'G' chord: 
+    ◯ ◯ ◯  
+┌─┬─┬─┬─┬─┐
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ ◯ │ │ │ │
+├─┼─┼─┼─┼─┤
+◯ │ │ │ │ ◯
+└─┴─┴─┴─┴─┘
+"#;
+
 /// A CLI to show you how to play a guitar chord
 #[derive(Parser)]
-#[clap(author, version, about, long_about = None)]
+#[clap(author, version, about = ABOUT, long_about = LONG_ABOUT)]
 #[clap(propagate_version = true)]
 pub struct Args {
+    /// The symbol used annotate the finger placement
+    /// 
+    /// For example, 
+    /// aschord -f ♥ get G
+    /// 
+    /// Other recommended symbols: ◉, ◯, ⦿, ♥, ❥ 
+    #[clap(short, long, default_value_t = '◯')]
+    finger_notation: char,
+    
     #[clap(subcommand)]
     command: Command,
 }
@@ -18,9 +45,9 @@ pub struct Args {
 impl Args {
     pub fn run(self) {
         match self.command {
-            Command::Get(get_args) => get_args.run(),
-            Command::List(list_args) => list_args.run(),
-            Command::All(all_args) => all_args.run(),
+            Command::Get(get_args) => get_args.run(self.finger_notation),
+            Command::List(list_args) => list_args.run(self.finger_notation),
+            Command::All(all_args) => all_args.run(self.finger_notation),
         }
     }
 }
@@ -43,7 +70,7 @@ pub struct GetArgs {
 }
 
 impl GetArgs {
-    fn run(self) {
+    fn run(self, finger_notation: char) {
         match chords::ALL_CHORDS
             .iter()
             .find(|&chord| chord.short_name.to_ascii_uppercase() == self.name.to_ascii_uppercase())
@@ -52,7 +79,7 @@ impl GetArgs {
             Some(chord) => println!(
                 "This is how you play '{}' chord: \n{}",
                 chord.name,
-                chord.fretboard()
+                chord.fretboard(finger_notation)
             ),
         }
     }
@@ -64,13 +91,13 @@ pub struct AllArgs {
     save: bool,
 }
 impl AllArgs {
-    fn run(self) {
+    fn run(self, finger_notation: char) {
         let mut buffer: String = String::default();
         buffer += "# All Supported Chords";
 
         for chord in chords::ALL_CHORDS {
             buffer += &format!("\n## {}\n", chord.both_names()).to_string();
-            buffer += &format!("```\n{}\n```", chord.fretboard()).to_string();
+            buffer += &format!("```\n{}\n```", chord.fretboard(finger_notation)).to_string();
         }
 
         if self.save {
@@ -87,12 +114,12 @@ pub struct ListArgs {
     names: Vec<String>,
 
     /// In the output, which name to include
-    #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortName)]
+    #[clap(value_enum, long, default_value_t=NameStyle::ShortName)]
     name_style: NameStyle,
 }
 
 impl ListArgs {
-    fn run(self) {
+    fn run(self, finger_notation: char) {
         // We would like to keep the order that 'names' are passed in
         let chords: Vec<Chord<'static>> = self
             .names
@@ -112,7 +139,7 @@ impl ListArgs {
             })
             .flatten()
             .collect();
-        let row = stitcher::row(chords, self.name_style);
+        let row = stitcher::row(chords, self.name_style, finger_notation);
         println!("{}", row);
     }
 }
