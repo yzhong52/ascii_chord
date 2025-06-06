@@ -90,7 +90,7 @@ pub struct ListArgs {
     #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortName)]
     name_style: NameStyle,
 
-    /// In the output, which name to include
+    /// In the output, how many spaces for padding between chords
     #[clap(short, long="padding", default_value_t=4)]
     padding: u8,
 }
