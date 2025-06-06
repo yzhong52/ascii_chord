@@ -10,7 +10,7 @@ pub enum NameStyle {
     BothNames,
 }
 
-pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
+pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding : u8) -> String {
     let display_names: Vec<String> = chords
         .iter()
         .map(|chord| match name_style {
@@ -27,14 +27,14 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
     let board_width = board[0].chars().count();
 
     // The 'padding' between chords horizontally
-    // Minimum 4 spaces between chords; 
+    // Minimum `padding` spaces between chords; 
     // Minimum 2 spaces between titles;
-    let padding: usize = max(4, max_display_name_width as i32 - board_width as i32 + 2) as usize;
+    let pad: usize = max(padding as i32, max_display_name_width as i32 - board_width as i32 + 2) as usize;
 
     // We need to make sure the last one has enough additional padding for the title
     let last_padding = max(0, display_names.last().unwrap().len() as i32 - board_width as i32) as usize;
     
-    let width = (board_width + padding) * num_chords - padding + last_padding;
+    let width = (board_width + pad) * num_chords - pad + last_padding;
 
     // +1 for the label - name of chord
     let height = board.len() + 1;
@@ -44,7 +44,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
     // Print the names of the chords
     for (i, display_name) in display_names.iter().enumerate() {
         for (char_id, char) in display_name.chars().enumerate() {
-            buffer[0][char_id + i * (board_width + padding)] = char;
+            buffer[0][char_id + i * (board_width + pad)] = char;
         }
     }
 
@@ -58,7 +58,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle) -> String {
 
         for (line_id, line) in diagram.iter().enumerate() {
             for (char_id, char) in line.chars().enumerate() {
-                buffer[line_id + 1][char_id + i * (board_width + padding)] = char;
+                buffer[line_id + 1][char_id + i * (board_width + pad)] = char;
             }
         }
     }

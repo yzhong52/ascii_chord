@@ -89,6 +89,10 @@ pub struct ListArgs {
     /// In the output, which name to include
     #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortName)]
     name_style: NameStyle,
+
+    /// In the output, which name to include
+    #[clap(short, long="padding", default_value_t=4)]
+    padding: u8,
 }
 
 impl ListArgs {
@@ -101,8 +105,8 @@ impl ListArgs {
                 // Find the ones that matches the chord name
                 match chords::ALL_CHORDS_BY_SHORT_NAME.get(&name.to_ascii_lowercase()) {
                     Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
-                        .iter()
-                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { *chord.clone() })
+                        .into_iter()
+                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { **chord })
                         .collect(),
                     None => {
                         println!("Unknown chord '{}'", name);
@@ -112,7 +116,7 @@ impl ListArgs {
             })
             .flatten()
             .collect();
-        let row = stitcher::row(chords, self.name_style);
+        let row = stitcher::row(chords, self.name_style, self.padding);
         println!("{}", row);
     }
 }
