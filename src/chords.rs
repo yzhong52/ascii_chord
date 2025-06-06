@@ -59,6 +59,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Asus",
+        pattern: "xx2230",
+        name: "A suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "Asus2",
         pattern: "x02200",
         name: "A suspended 2nd",
@@ -119,6 +125,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Bsus",
+        pattern: "xx3341",
+        name: "B suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "C",
         pattern: "x32010",
         name: "C major",
@@ -167,6 +179,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Csus",
+        pattern: "xx3013",
+        name: "C suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "D",
         pattern: "xx0232",
         name: "D major",
@@ -212,6 +230,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "Dm7",
         pattern: "xx0211",
         name: "D minor 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "Dsus",
+        pattern: "xx0233",
+        name: "D suspended",
         barre: None,
     },
     Chord {
@@ -266,6 +290,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "Em7",
         pattern: "022030",
         name: "E minor 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "Esus",
+        pattern: "022200",
+        name: "E suspended",
         barre: None,
     },
     Chord {
@@ -329,6 +359,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Fsus",
+        pattern: "xx3311",
+        name: "F suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "G",
         pattern: "320003",
         name: "G major",
@@ -374,6 +410,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "Gm7",
         pattern: "x13030",
         name: "G minor 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "Gsus",
+        pattern: "xx0013",
+        name: "G suspended",
         barre: None,
     },
 ];
