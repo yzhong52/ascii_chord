@@ -11,6 +11,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "A+",
+        pattern: "x03221",
+        name: "A augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Amaj7",
         pattern: "x02120",
         name: "A major 7th",
@@ -65,6 +71,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "B+",
+        pattern: "xx3221",
+        name: "B augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Bmaj7",
         pattern: "22130x",
         name: "B major 7th",
@@ -113,6 +125,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "C+",
+        pattern: "x32110",
+        name: "C augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Cmaj7",
         pattern: "x32000",
         name: "C major 7th",
@@ -155,6 +173,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "D+",
+        pattern: "xx0332",
+        name: "D augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Dmaj7",
         pattern: "xx0222",
         name: "D major 7th",
@@ -194,6 +218,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "E",
         pattern: "022100",
         name: "E major",
+        barre: None,
+    },
+    Chord {
+        short_name: "E+",
+        pattern: "03211x",
+        name: "E augmented",
         barre: None,
     },
     Chord {
@@ -251,6 +281,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: Some(BARRE_FRET1),
     },
     Chord {
+        short_name: "F+",
+        pattern: "xx3221",
+        name: "F augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Fmaj7",
         pattern: "xx3210",
         name: "F major 7th",
@@ -296,6 +332,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "G",
         pattern: "320003",
         name: "G major",
+        barre: None,
+    },
+    Chord {
+        short_name: "G+",
+        pattern: "321003",
+        name: "G augmented",
         barre: None,
     },
     Chord {
