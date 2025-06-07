@@ -11,15 +11,39 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "A+",
+        pattern: "x03221",
+        name: "A augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Amaj7",
         pattern: "x02120",
         name: "A major 7th",
         barre: None,
     },
     Chord {
+        short_name: "A6",
+        pattern: "x02222",
+        name: "A 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "A7",
         pattern: "x02020",
-        name: "A 7th",
+        name: "A 7th (shape 1)",
+        barre: None,
+    },
+    Chord {
+        short_name: "A7",
+        pattern: "x02223",
+        name: "A 7th (shape 2)",
+        barre: None,
+    },
+    Chord {
+        short_name: "A9",
+        pattern: "x02423",
+        name: "A 9th",
         barre: None,
     },
     Chord {
@@ -35,6 +59,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Asus",
+        pattern: "xx2230",
+        name: "A suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "Asus2",
         pattern: "x02200",
         name: "A suspended 2nd",
@@ -47,15 +77,33 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "B+",
+        pattern: "xx3221",
+        name: "B augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Bmaj7",
         pattern: "22130x",
         name: "B major 7th",
         barre: None,
     },
     Chord {
+        short_name: "B6",
+        pattern: "224444",
+        name: "B 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "B7",
         pattern: "x21202",
         name: "B 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "B9",
+        pattern: "x21222",
+        name: "B 9th",
         barre: None,
     },
     Chord {
@@ -77,9 +125,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Bsus",
+        pattern: "xx3341",
+        name: "B suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "C",
         pattern: "x32010",
         name: "C major",
+        barre: None,
+    },
+    Chord {
+        short_name: "C+",
+        pattern: "x32110",
+        name: "C augmented",
         barre: None,
     },
     Chord {
@@ -89,9 +149,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "C6",
+        pattern: "x02213",
+        name: "C 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "C7",
         pattern: "x32310",
         name: "C 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "C9",
+        pattern: "x32333",
+        name: "C 9th",
         barre: None,
     },
     Chord {
@@ -107,9 +179,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Csus",
+        pattern: "xx3013",
+        name: "C suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "D",
         pattern: "xx0232",
         name: "D major",
+        barre: None,
+    },
+    Chord {
+        short_name: "D+",
+        pattern: "xx0332",
+        name: "D augmented",
         barre: None,
     },
     Chord {
@@ -119,9 +203,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "D6",
+        pattern: "x00202",
+        name: "D 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "D7",
         pattern: "xx0212",
         name: "D 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "D9",
+        pattern: "200210",
+        name: "D 9th",
         barre: None,
     },
     Chord {
@@ -137,9 +233,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Dsus",
+        pattern: "xx0233",
+        name: "D suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "E",
         pattern: "022100",
         name: "E major",
+        barre: None,
+    },
+    Chord {
+        short_name: "E+",
+        pattern: "03211x",
+        name: "E augmented",
         barre: None,
     },
     Chord {
@@ -149,9 +257,27 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "E6",
+        pattern: "022120",
+        name: "E 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "E7",
         pattern: "020100",
-        name: "E 7th",
+        name: "E 7th (shape 1)",
+        barre: None,
+    },
+    Chord {
+        short_name: "E7",
+        pattern: "022130",
+        name: "E 7th (shape 2)",
+        barre: None,
+    },
+    Chord {
+        short_name: "E9",
+        pattern: "020102",
+        name: "E 9th",
         barre: None,
     },
     Chord {
@@ -167,6 +293,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Esus",
+        pattern: "022200",
+        name: "E suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "Esus4",
         pattern: "022200",
         name: "E suspended 4th",
@@ -179,15 +311,33 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: Some(BARRE_FRET1),
     },
     Chord {
+        short_name: "F+",
+        pattern: "xx3221",
+        name: "F augmented",
+        barre: None,
+    },
+    Chord {
         short_name: "Fmaj7",
         pattern: "xx3210",
         name: "F major 7th",
         barre: None,
     },
     Chord {
+        short_name: "F6",
+        pattern: "xx0211",
+        name: "F 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "F7",
         pattern: "131211",
         name: "F 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "F9",
+        pattern: "xx3243",
+        name: "F 9th",
         barre: None,
     },
     Chord {
@@ -209,9 +359,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "Fsus",
+        pattern: "xx3311",
+        name: "F suspended",
+        barre: None,
+    },
+    Chord {
         short_name: "G",
         pattern: "320003",
         name: "G major",
+        barre: None,
+    },
+    Chord {
+        short_name: "G+",
+        pattern: "321003",
+        name: "G augmented",
         barre: None,
     },
     Chord {
@@ -221,9 +383,21 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         barre: None,
     },
     Chord {
+        short_name: "G6",
+        pattern: "320000",
+        name: "G 6th",
+        barre: None,
+    },
+    Chord {
         short_name: "G7",
         pattern: "320001",
         name: "G 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "G9",
+        pattern: "300201",
+        name: "G 9th",
         barre: None,
     },
     Chord {
@@ -236,6 +410,12 @@ pub static ALL_CHORDS: &'static [Chord] = &[
         short_name: "Gm7",
         pattern: "x13030",
         name: "G minor 7th",
+        barre: None,
+    },
+    Chord {
+        short_name: "Gsus",
+        pattern: "xx0013",
+        name: "G suspended",
         barre: None,
     },
 ];
