@@ -91,7 +91,7 @@ pub static ALL_CHORDS_BY_SHORT_NAME: Lazy<HashMap<String, Vec<&'static Chord<'st
         for chord in ALL_CHORDS {
             for name in chord.short_names {
                 if name.is_some() {
-                    map.entry(name.unwrap_or("").to_ascii_lowercase())
+                    map.entry(name.unwrap().to_ascii_lowercase())
                     .or_default()
                     .push(chord);
                 }
