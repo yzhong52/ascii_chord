@@ -44,9 +44,10 @@ pub struct GetArgs {
 
 impl GetArgs {
     fn run(self) {
+        let name_uppercase = self.name.to_ascii_uppercase();
         match chords::ALL_CHORDS
             .iter()
-            .find(|&chord| chord.short_name.to_ascii_uppercase() == self.name.to_ascii_uppercase())
+            .find(|&chord| chord.short_names.iter().any(|&name| name.unwrap_or("").to_ascii_uppercase() == name_uppercase))
         {
             None => println!("Unknown chord '{}'", self.name),
             Some(chord) => println!(
@@ -91,7 +92,7 @@ pub struct ListArgs {
     name_style: NameStyle,
 
     /// In the output, how many spaces for padding between chords
-    #[clap(short, long="padding", default_value_t=4)]
+    #[clap(short, long, default_value_t=4)]
     padding: u8,
 }
 

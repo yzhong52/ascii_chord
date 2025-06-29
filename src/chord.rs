@@ -1,3 +1,5 @@
+use itertools::join;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Barre {
     // Guitar normally call the string with the highest pitch, or the thinnest,
@@ -21,9 +23,15 @@ pub const BARRE_FRET2: Barre = Barre {
     fret: 2,
 };
 
+pub const BARRE_FRET3: Barre = Barre {
+    from_string: 0,
+    to_string: 5,
+    fret: 3,
+};
+
 #[derive(Debug, Clone, Copy)]
 pub struct Chord<'a> {
-    pub short_name: &'a str,
+    pub short_names: [Option<&'a str>; 2],
     // Require to be length of 6.
     // 'x' indicates that the string should be muted.
     // '0' indicates that playing the string as it (without finger placement).
@@ -31,6 +39,17 @@ pub struct Chord<'a> {
     pub pattern: &'a str,
     pub name: &'a str,
     pub barre: Option<Barre>,
+}
+
+impl<'a> Chord<'a> {
+    pub const fn new(short_name: &'a str, pattern: &'a str, name: &'a str, barre: Option<Barre>) -> Self {
+        Self {
+            short_names : [Some(short_name), None],
+            pattern : pattern,
+            name : name,
+            barre : barre
+        }
+    }
 }
 
 pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
@@ -46,7 +65,7 @@ pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 
 impl Chord<'_> {
     pub fn both_names(&self) -> String {
-        format!("{} ({})", self.name, self.short_name)
+        format!("{} ({})", self.name, join(self.short_names.iter().filter_map(|&name| name), " | "))
     }
 
     pub fn fretboard(&self) -> String {

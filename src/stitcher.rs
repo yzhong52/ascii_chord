@@ -2,6 +2,7 @@ use chord::Chord;
 use chord::FRETBOARD;
 use clap::ArgEnum;
 use std::cmp::max;
+use itertools::join;
 
 #[derive(Debug, ArgEnum, Clone)]
 pub enum NameStyle {
@@ -14,7 +15,7 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding : u8) -> S
     let display_names: Vec<String> = chords
         .iter()
         .map(|chord| match name_style {
-            NameStyle::ShortName => chord.short_name.to_owned(),
+            NameStyle::ShortName => join(chord.short_names.iter().filter_map(|&name| name), " | "),
             NameStyle::FullName => chord.name.to_owned(),
             NameStyle::BothNames => chord.both_names(),
         })
