@@ -1,5 +1,6 @@
 extern crate clap;
 extern crate once_cell;
+extern crate itertools;
 
 mod chord;
 mod chords;
