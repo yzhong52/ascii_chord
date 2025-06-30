@@ -1,8 +1,7 @@
-use chord::Chord;
-use chord::FRETBOARD;
+use chord::{Chord, FRETBOARD};
+use itertools::join;
 use clap::ArgEnum;
 use std::cmp::max;
-use itertools::join;
 
 #[derive(Debug, ArgEnum, Clone)]
 pub enum NameStyle {

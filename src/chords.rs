@@ -1,7 +1,6 @@
-use chord::Chord;
-use chord::{BARRE_FRET1, BARRE_FRET2, BARRE_FRET3};
-use once_cell::sync::Lazy;
+use chord::{Chord, BARRE_FRET1, BARRE_FRET2, BARRE_FRET3};
 use std::collections::HashMap;
+use once_cell::sync::Lazy;
 
 pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new("A", "x02220", "A major", None),
@@ -102,7 +101,7 @@ pub static ALL_CHORDS_BY_SHORT_NAME: Lazy<HashMap<String, Vec<&'static Chord<'st
 
 #[cfg(test)]
 mod tests {
-    // Note ᵗʰis useful idiom: importing names from outer (for mod tests) scope.
+    // NOTE: This useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
 
     #[test]

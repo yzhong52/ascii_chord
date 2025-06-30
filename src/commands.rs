@@ -1,8 +1,7 @@
 use clap::{Parser, Subcommand};
 use stitcher::NameStyle;
 
-use crate::chords;
-use crate::stitcher;
+use crate::{chords,stitcher};
 use chord::Chord;
 use std::fs;
 

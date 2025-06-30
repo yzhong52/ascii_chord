@@ -11,23 +11,30 @@ pub struct Barre {
     pub fret: u16,
 }
 
-pub const BARRE_FRET1: Barre = Barre {
-    from_string: 0,
-    to_string: 5,
-    fret: 1,
-};
+impl Barre {
+    pub const fn new(fret: u16) -> Self {
+        Self {
+            from_string : 0,
+            to_string : 5,
+            fret : fret,
+        }
+    }
+}
 
-pub const BARRE_FRET2: Barre = Barre {
-    from_string: 0,
-    to_string: 5,
-    fret: 2,
-};
+pub const BARRE_FRET1: Barre = Barre::new(1);
+pub const BARRE_FRET2: Barre = Barre::new(2);
+pub const BARRE_FRET3: Barre = Barre::new(3);
 
-pub const BARRE_FRET3: Barre = Barre {
-    from_string: 0,
-    to_string: 5,
-    fret: 3,
-};
+pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
+╒═╤═╤═╤═╤═╕
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+├─┼─┼─┼─┼─┤
+│ │ │ │ │ │
+└─┴─┴─┴─┴─┘";
 
 #[derive(Debug, Clone, Copy)]
 pub struct Chord<'a> {
@@ -50,20 +57,7 @@ impl<'a> Chord<'a> {
             barre : barre
         }
     }
-}
 
-pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
-╒═╤═╤═╤═╤═╕
-│ │ │ │ │ │
-├─┼─┼─┼─┼─┤
-│ │ │ │ │ │
-├─┼─┼─┼─┼─┤
-│ │ │ │ │ │
-├─┼─┼─┼─┼─┤
-│ │ │ │ │ │
-└─┴─┴─┴─┴─┘";
-
-impl Chord<'_> {
     pub fn both_names(&self) -> String {
         format!("{} ({})", self.name, join(self.short_names.iter().filter_map(|&name| name), " | "))
     }

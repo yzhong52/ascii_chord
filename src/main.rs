@@ -1,11 +1,11 @@
-extern crate clap;
 extern crate once_cell;
 extern crate itertools;
+extern crate clap;
 
-mod chord;
-mod chords;
 mod commands;
 mod stitcher;
+mod chords;
+mod chord;
 
 use clap::Parser;
 use commands::Args;
