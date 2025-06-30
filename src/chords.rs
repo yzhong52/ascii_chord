@@ -1,6 +1,6 @@
 use chord::{Chord, BARRE_FRET1, BARRE_FRET2, BARRE_FRET3};
-use std::collections::HashMap;
 use once_cell::sync::Lazy;
+use std::collections::HashMap;
 
 pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new("A", "x02220", "A major", None),
@@ -91,8 +91,8 @@ pub static ALL_CHORDS_BY_SHORT_NAME: Lazy<HashMap<String, Vec<&'static Chord<'st
             for name in chord.short_names {
                 if name.is_some() {
                     map.entry(name.unwrap().to_ascii_lowercase())
-                    .or_default()
-                    .push(chord);
+                        .or_default()
+                        .push(chord);
                 }
             }
         }

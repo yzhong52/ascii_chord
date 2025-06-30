@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 use stitcher::NameStyle;
 
-use crate::{chords,stitcher};
+use crate::{chords, stitcher};
 use chord::Chord;
 use std::fs;
 
@@ -44,10 +44,12 @@ pub struct GetArgs {
 impl GetArgs {
     fn run(self) {
         let name_uppercase = self.name.to_ascii_uppercase();
-        match chords::ALL_CHORDS
-            .iter()
-            .find(|&chord| chord.short_names.iter().any(|&name| name.unwrap_or("").to_ascii_uppercase() == name_uppercase))
-        {
+        match chords::ALL_CHORDS.iter().find(|&chord| {
+            chord
+                .short_names
+                .iter()
+                .any(|&name| name.unwrap_or("").to_ascii_uppercase() == name_uppercase)
+        }) {
             None => println!("Unknown chord '{}'", self.name),
             Some(chord) => println!(
                 "This is how you play '{}' chord: \n{}",
@@ -91,7 +93,7 @@ pub struct ListArgs {
     name_style: NameStyle,
 
     /// In the output, how many spaces for padding between chords
-    #[clap(short, long, default_value_t=4)]
+    #[clap(short, long, default_value_t = 4)]
     padding: u8,
 }
 

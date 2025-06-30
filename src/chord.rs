@@ -14,9 +14,9 @@ pub struct Barre {
 impl Barre {
     pub const fn new(fret: u16) -> Self {
         Self {
-            from_string : 0,
-            to_string : 5,
-            fret : fret,
+            from_string: 0,
+            to_string: 5,
+            fret: fret,
         }
     }
 }
@@ -49,17 +49,26 @@ pub struct Chord<'a> {
 }
 
 impl<'a> Chord<'a> {
-    pub const fn new(short_name: &'a str, pattern: &'a str, name: &'a str, barre: Option<Barre>) -> Self {
+    pub const fn new(
+        short_name: &'a str,
+        pattern: &'a str,
+        name: &'a str,
+        barre: Option<Barre>,
+    ) -> Self {
         Self {
-            short_names : [Some(short_name), None],
-            pattern : pattern,
-            name : name,
-            barre : barre
+            short_names: [Some(short_name), None],
+            pattern: pattern,
+            name: name,
+            barre: barre,
         }
     }
 
     pub fn both_names(&self) -> String {
-        format!("{} ({})", self.name, join(self.short_names.iter().filter_map(|&name| name), " | "))
+        format!(
+            "{} ({})",
+            self.name,
+            join(self.short_names.iter().filter_map(|&name| name), " | ")
+        )
     }
 
     pub fn fretboard(&self) -> String {
