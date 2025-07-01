@@ -1,21 +1,21 @@
-use chord::Chord;
-use chord::FRETBOARD;
+use chord::{Chord, FRETBOARD};
 use clap::ArgEnum;
+use itertools::join;
 use std::cmp::max;
 
 #[derive(Debug, ArgEnum, Clone)]
 pub enum NameStyle {
-    ShortName,
-    FullName,
+    ShortNames,
+    FullNames,
     BothNames,
 }
 
-pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding : u8) -> String {
+pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding: u8) -> String {
     let display_names: Vec<String> = chords
         .iter()
         .map(|chord| match name_style {
-            NameStyle::ShortName => chord.short_name.to_owned(),
-            NameStyle::FullName => chord.name.to_owned(),
+            NameStyle::ShortNames => join(chord.short_names.iter().filter_map(|&name| name), " | "),
+            NameStyle::FullNames => chord.names.to_owned(),
             NameStyle::BothNames => chord.both_names(),
         })
         .collect();
@@ -27,13 +27,19 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding : u8) -> S
     let board_width = board[0].chars().count();
 
     // The 'padding' between chords horizontally
-    // Minimum `padding` spaces between chords; 
+    // Minimum `padding` spaces between chords;
     // Minimum 2 spaces between titles;
-    let pad: usize = max(padding as i32, max_display_name_width as i32 - board_width as i32 + 2) as usize;
+    let pad: usize = max(
+        padding as i32,
+        max_display_name_width as i32 - board_width as i32 + 2,
+    ) as usize;
 
     // We need to make sure the last one has enough additional padding for the title
-    let last_padding = max(0, display_names.last().unwrap().len() as i32 - board_width as i32) as usize;
-    
+    let last_padding = max(
+        0,
+        display_names.last().unwrap().len() as i32 - board_width as i32,
+    ) as usize;
+
     let width = (board_width + pad) * num_chords - pad + last_padding;
 
     // +1 for the label - name of chord

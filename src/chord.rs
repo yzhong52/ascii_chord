@@ -1,3 +1,5 @@
+use itertools::join;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Barre {
     // Guitar normally call the string with the highest pitch, or the thinnest,
@@ -9,29 +11,19 @@ pub struct Barre {
     pub fret: u16,
 }
 
-pub const BARRE_FRET1: Barre = Barre {
-    from_string: 0,
-    to_string: 5,
-    fret: 1,
-};
-
-pub const BARRE_FRET2: Barre = Barre {
-    from_string: 0,
-    to_string: 5,
-    fret: 2,
-};
-
-#[derive(Debug, Clone, Copy)]
-pub struct Chord<'a> {
-    pub short_name: &'a str,
-    // Require to be length of 6.
-    // 'x' indicates that the string should be muted.
-    // '0' indicates that playing the string as it (without finger placement).
-    // '1' indicates that we place a finger on the first fret, '2' on the 2nd fret, and etc.
-    pub pattern: &'a str,
-    pub name: &'a str,
-    pub barre: Option<Barre>,
+impl Barre {
+    pub const fn new(fret: u16) -> Self {
+        Self {
+            from_string: 0,
+            to_string: 5,
+            fret: fret,
+        }
+    }
 }
+
+pub const BARRE_FRET1: Barre = Barre::new(1);
+pub const BARRE_FRET2: Barre = Barre::new(2);
+pub const BARRE_FRET3: Barre = Barre::new(3);
 
 pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 ╒═╤═╤═╤═╤═╕
@@ -44,9 +36,39 @@ pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 │ │ │ │ │ │
 └─┴─┴─┴─┴─┘";
 
-impl Chord<'_> {
+#[derive(Debug, Clone, Copy)]
+pub struct Chord<'a> {
+    pub short_names: [Option<&'a str>; 3],
+    // Require to be length of 6.
+    // 'x' indicates that the string should be muted.
+    // '0' indicates that playing the string as it (without finger placement).
+    // '1' indicates that we place a finger on the first fret, '2' on the 2nd fret, and etc.
+    pub pattern: &'a str,
+    pub names: &'a str,
+    pub barre: Option<Barre>,
+}
+
+impl<'a> Chord<'a> {
+    pub const fn new(
+        short_name: &'a str,
+        pattern: &'a str,
+        names: &'a str,
+        barre: Option<Barre>,
+    ) -> Self {
+        Self {
+            short_names: [Some(short_name), None, None],
+            pattern: pattern,
+            names: names,
+            barre: barre,
+        }
+    }
+
     pub fn both_names(&self) -> String {
-        format!("{} ({})", self.name, self.short_name)
+        format!(
+            "{} ({})",
+            self.names,
+            join(self.short_names.iter().filter_map(|&name| name), " | ")
+        )
     }
 
     pub fn fretboard(&self) -> String {
