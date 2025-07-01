@@ -48,12 +48,12 @@ impl GetArgs {
             chord
                 .short_names
                 .iter()
-                .any(|&name| name.unwrap_or("").to_ascii_uppercase() == name_uppercase)
+                .any(|&name| name.to_ascii_uppercase() == name_uppercase)
         }) {
             None => println!("Unknown chord '{}'", self.name),
             Some(chord) => println!(
                 "This is how you play '{}' chord: \n{}",
-                chord.names,
+                self.name,
                 chord.fretboard()
             ),
         }
@@ -108,7 +108,7 @@ impl ListArgs {
                 match chords::ALL_CHORDS_BY_SHORT_NAMES.get(&name.to_ascii_lowercase()) {
                     Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
                         .into_iter()
-                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { **chord })
+                        .map(|chord: &&'static Chord<'static>| -> Chord<'static> { (*chord).clone() })
                         .collect(),
                     None => {
                         println!("Unknown chord '{}'", name);
