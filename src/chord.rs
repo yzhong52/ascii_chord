@@ -44,7 +44,7 @@ pub struct Chord<'a> {
     // '0' indicates that playing the string as it (without finger placement).
     // '1' indicates that we place a finger on the first fret, '2' on the 2nd fret, and etc.
     pub pattern: &'a str,
-    pub name: &'a str,
+    pub names: &'a str,
     pub barre: Option<Barre>,
 }
 
@@ -52,13 +52,13 @@ impl<'a> Chord<'a> {
     pub const fn new(
         short_name: &'a str,
         pattern: &'a str,
-        name: &'a str,
+        names: &'a str,
         barre: Option<Barre>,
     ) -> Self {
         Self {
             short_names: [Some(short_name), None],
             pattern: pattern,
-            name: name,
+            names: names,
             barre: barre,
         }
     }
@@ -66,7 +66,7 @@ impl<'a> Chord<'a> {
     pub fn both_names(&self) -> String {
         format!(
             "{} ({})",
-            self.name,
+            self.names,
             join(self.short_names.iter().filter_map(|&name| name), " | ")
         )
     }

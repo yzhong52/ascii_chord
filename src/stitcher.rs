@@ -5,8 +5,8 @@ use std::cmp::max;
 
 #[derive(Debug, ArgEnum, Clone)]
 pub enum NameStyle {
-    ShortName,
-    FullName,
+    ShortNames,
+    FullNames,
     BothNames,
 }
 
@@ -14,8 +14,8 @@ pub fn row<'a>(chords: Vec<Chord<'a>>, name_style: NameStyle, padding: u8) -> St
     let display_names: Vec<String> = chords
         .iter()
         .map(|chord| match name_style {
-            NameStyle::ShortName => join(chord.short_names.iter().filter_map(|&name| name), " | "),
-            NameStyle::FullName => chord.name.to_owned(),
+            NameStyle::ShortNames => join(chord.short_names.iter().filter_map(|&name| name), " | "),
+            NameStyle::FullNames => chord.names.to_owned(),
             NameStyle::BothNames => chord.both_names(),
         })
         .collect();

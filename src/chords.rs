@@ -43,7 +43,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_names: [Some("Dm7"), Some("F6")],
         pattern: "xx0211",
-        name: "D minor 7ᵗʰ | F 6ᵗʰ",
+        names: "D minor 7ᵗʰ | F 6ᵗʰ",
         barre: None,
     },
     Chord::new("Dsus", "xx0233", "D suspended", None),
@@ -59,7 +59,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord {
         short_names: [Some("Esus"), Some("Esus4")],
         pattern: "022200",
-        name: "E suspended | E suspended 4ᵗʰ",
+        names: "E suspended | E suspended 4ᵗʰ",
         barre: None,
     },
     Chord::new("F", "133211", "F major", Some(BARRE_FRET1)),
@@ -83,14 +83,14 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new("Gsus", "xx0013", "G suspended", None),
 ];
 
-pub static ALL_CHORDS_BY_SHORT_NAME: Lazy<HashMap<String, Vec<&'static Chord<'static>>>> =
+pub static ALL_CHORDS_BY_SHORT_NAMES: Lazy<HashMap<String, Vec<&'static Chord<'static>>>> =
     Lazy::new(|| {
         let mut map = HashMap::<_, Vec<_>>::new();
 
         for chord in ALL_CHORDS {
-            for name in chord.short_names {
-                if name.is_some() {
-                    map.entry(name.unwrap().to_ascii_lowercase())
+            for sn in chord.short_names {
+                if sn.is_some() {
+                    map.entry(sn.unwrap().to_ascii_lowercase())
                         .or_default()
                         .push(chord);
                 }

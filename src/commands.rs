@@ -53,7 +53,7 @@ impl GetArgs {
             None => println!("Unknown chord '{}'", self.name),
             Some(chord) => println!(
                 "This is how you play '{}' chord: \n{}",
-                chord.name,
+                chord.names,
                 chord.fretboard()
             ),
         }
@@ -89,7 +89,7 @@ pub struct ListArgs {
     names: Vec<String>,
 
     /// In the output, which name to include
-    #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortName)]
+    #[clap(arg_enum, long="style", default_value_t=NameStyle::ShortNames)]
     name_style: NameStyle,
 
     /// In the output, how many spaces for padding between chords
@@ -105,7 +105,7 @@ impl ListArgs {
             .iter()
             .map(|name| -> Vec<Chord<'static>> {
                 // Find the ones that matches the chord name
-                match chords::ALL_CHORDS_BY_SHORT_NAME.get(&name.to_ascii_lowercase()) {
+                match chords::ALL_CHORDS_BY_SHORT_NAMES.get(&name.to_ascii_lowercase()) {
                     Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
                         .into_iter()
                         .map(|chord: &&'static Chord<'static>| -> Chord<'static> { **chord })
