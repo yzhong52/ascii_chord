@@ -101,7 +101,7 @@ pub static ALL_CHORDS_BY_SHORT_NAME: Lazy<HashMap<String, Vec<&'static Chord<'st
 
 #[cfg(test)]
 mod tests {
-    // NOTE: This useful idiom: importing names from outer (for mod tests) scope.
+    // NOTE: Useful idiom - importing names from outer (for mod tests) scope.
     use super::*;
 
     #[test]
