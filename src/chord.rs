@@ -36,27 +36,27 @@ pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 │ │ │ │ │ │
 └─┴─┴─┴─┴─┘";
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub struct Chord<'a> {
-    pub short_names: [Option<&'a str>; 3],
+    pub short_names: &'a [&'a str],
     // Require to be length of 6.
     // 'x' indicates that the string should be muted.
     // '0' indicates that playing the string as it (without finger placement).
     // '1' indicates that we place a finger on the first fret, '2' on the 2nd fret, and etc.
     pub pattern: &'a str,
-    pub names: &'a str,
+    pub names: &'a [&'a str],
     pub barre: Option<Barre>,
 }
 
 impl<'a> Chord<'a> {
     pub const fn new(
-        short_name: &'a str,
+        short_names: &'a [&'a str],
         pattern: &'a str,
-        names: &'a str,
+        names: &'a [&'a str],
         barre: Option<Barre>,
     ) -> Self {
         Self {
-            short_names: [Some(short_name), None, None],
+            short_names: short_names,
             pattern: pattern,
             names: names,
             barre: barre,
@@ -66,8 +66,8 @@ impl<'a> Chord<'a> {
     pub fn both_names(&self) -> String {
         format!(
             "{} ({})",
-            self.names,
-            join(self.short_names.iter().filter_map(|&name| name), " | ")
+            join(self.names, " | "),
+            join(self.short_names, " | ")
         )
     }
 
