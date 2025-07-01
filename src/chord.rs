@@ -38,7 +38,7 @@ pub const FRETBOARD: &str = "◯ ◯ ◯ ◯ ◯ ◯
 
 #[derive(Debug, Clone, Copy)]
 pub struct Chord<'a> {
-    pub short_names: [Option<&'a str>; 2],
+    pub short_names: [Option<&'a str>; 3],
     // Require to be length of 6.
     // 'x' indicates that the string should be muted.
     // '0' indicates that playing the string as it (without finger placement).
@@ -56,7 +56,7 @@ impl<'a> Chord<'a> {
         barre: Option<Barre>,
     ) -> Self {
         Self {
-            short_names: [Some(short_name), None],
+            short_names: [Some(short_name), None, None],
             pattern: pattern,
             names: names,
             barre: barre,

@@ -41,7 +41,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new("D9", "200210", "D 9ᵗʰ", None),
     Chord::new("Dm", "xx0231", "D minor", None),
     Chord {
-        short_names: [Some("Dm7"), Some("F6")],
+        short_names: [Some("Dm7"), Some("F6"), None],
         pattern: "xx0211",
         names: "D minor 7ᵗʰ | F 6ᵗʰ",
         barre: None,
@@ -57,7 +57,7 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new("Em", "022000", "E minor", None),
     Chord::new("Em7", "022030", "E minor 7ᵗʰ", None),
     Chord {
-        short_names: [Some("Esus"), Some("Esus4")],
+        short_names: [Some("Esus"), Some("Esus4"), None],
         pattern: "022200",
         names: "E suspended | E suspended 4ᵗʰ",
         barre: None,
