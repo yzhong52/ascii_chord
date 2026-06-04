@@ -115,7 +115,7 @@ Also see all supported chords [here](all_supported_chords.md) (auto-generated, d
 Install local version:
 
 ```
-git clone git@github.com:yzhong52/ascii_chord.git
+git clone git@github.com:ascii-music/ascii_chord.git
 cd ascii_chord
 cargo install --path .
 ```
