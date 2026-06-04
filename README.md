@@ -1,5 +1,5 @@
-[![CI](https://github.com/yzhong52/ascii_chord/actions/workflows/rust.yml/badge.svg)](
-  https://github.com/yzhong52/ascii_chord/actions?query=workflow%3Arust
+[![CI](https://github.com//ascii-music/ascii_chord/actions/workflows/rust.yml/badge.svg)](
+  https://github.com//ascii-music/ascii_chord/actions?query=workflow%3Arust
 )
 
 
